@@ -3,6 +3,10 @@ const totalRevenueInput = document.getElementById('totalRevenue');
 const avgOrderValueInput = document.getElementById('avgOrderValue');
 const leadResponseRateSlider = document.getElementById('leadResponseRate');
 const prospectResponseRateSlider = document.getElementById('prospectResponseRate');
+const barProspects = document.getElementById('barProspects');
+const barLeads = document.getElementById('barLeads');
+const barCustomers = document.getElementById('barCustomers');
+
 
 // Елементи за показване на текущите проценти над слайдерите
 const leadRateValSpan = document.getElementById('leadRateVal');
@@ -43,6 +47,21 @@ function calculateMetrics() {
     resCustomersCard.textContent = Math.round(customers);
     resLeadsCard.textContent = Math.round(leads);
     resProspectsCard.textContent = Math.round(prospects);
+      
+    // Изчисляване на широчината на лентите за графиката
+    if (prospects > 0) {
+        let leadsWidth = (leads / prospects) * 100;
+        let customersWidth = (customers / prospects) * 100;
+
+        barProspects.style.width = "100%";
+        barLeads.style.width = leadsWidth + "%";
+        barCustomers.style.width = customersWidth + "%";
+    } else {
+        barProspects.style.width = "0%";
+        barLeads.style.width = "0%";
+        barCustomers.style.width = "0%";
+    }
+
 }
 
 // 4. Закачане на Слушатели (Event Listeners) за промяна
